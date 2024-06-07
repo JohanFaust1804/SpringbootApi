@@ -7,6 +7,8 @@ import com.aluracursos.screenmatch.entities.DatosTemporada;
 import com.aluracursos.screenmatch.entities.Episodio;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConvierteDatos;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -69,6 +71,12 @@ public class Principal {
 
         episodios.forEach(System.out::println);
 
+        System.out.println("Por favor indica el año del cual deseas buscar el episodio");
+        var fecha  = teclado.nextLine();
+        LocalDate fechaBusqueda = LocalDate.of(Integer.parseInt(fecha), 1, 1);
+
+        episodios.stream()
+                .filter(e -> e.getFechadeLanzamiento() )
     }
 
 }
