@@ -76,7 +76,8 @@ public class Principal {
         LocalDate fechaBusqueda = LocalDate.of(Integer.parseInt(fecha), 1, 1);
 
         episodios.stream()
-                .filter(e -> e.getFechadeLanzamiento() )
+                .filter(e -> e.getFechadeLanzamiento() != null && e.getFechadeLanzamiento().isAfter(fechaBusqueda))
+                .forEach(e -> );
     }
 
 }
