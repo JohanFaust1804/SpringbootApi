@@ -103,7 +103,7 @@ public class Principal {
         Map <Integer, Double> evaluacionesPorTemporada = episodios.stream()
                 .filter(e -> e.getEvaluacion() )
                 .collect(Collectors.groupingBy(Episodio::getTemporada,
-                        Collectors.averagingDouble(Episodio::gsaaqweer¿pkmzmsak}dkañsdkkqqewjjDsaq1234556768989'¿cetEvaluacion)));
+                        Collectors.averagingDouble(Episodio::getEvaluacion)));
 
         System.out.println(evaluacionesPorTemporada);
     }
