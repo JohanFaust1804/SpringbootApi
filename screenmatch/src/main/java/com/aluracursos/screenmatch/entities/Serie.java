@@ -1,9 +1,12 @@
 package com.aluracursos.screenmatch.entities;
 
+import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.OptionalDouble;
 
-@Entity 
-@Table (name = "series")
+@Entit
+@Table(name = "series")
 public class Serie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +23,9 @@ public class Serie {
     @Transient
     private List<Episodio> episodios;
 
-    public Serie(){}
+    public Serie(){
+
+    }
 
     public Serie(DatosSerie datosSerie){
         this.titulo = datosSerie.titulo();
