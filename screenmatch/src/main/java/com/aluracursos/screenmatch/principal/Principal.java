@@ -135,6 +135,6 @@ public class Principal {
         topSeries.forEach(s -> System.out.println("Serie : "  + s.getTitulo() + "Evaluacion" + s.getEvaluacion()));
     }
     private void buscarSeriesPorCategoria(){
-        
+
     }
 }
