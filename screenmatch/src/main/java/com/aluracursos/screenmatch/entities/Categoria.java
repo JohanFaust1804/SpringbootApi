@@ -1,13 +1,10 @@
 package com.aluracursos.screenmatch.entities;
 
-<<<<<<< HEAD
+
 import com.fasterxml.jackson.annotation.JsonAlias;
 
-public enum Categoria {
 
-=======
-public enum Categoria {
->>>>>>> 68e7887bfe8bf448e3b3475fe7b14d0cbc43fb83
+    public enum Categoria {
     ACCION("Action"),
     ROMANCE("Romance"),
     COMEDIA("Comedy"),

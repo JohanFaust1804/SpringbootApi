@@ -1,5 +1,7 @@
 package com.aluracursos.screenmatch.entities;
 
+import jakarta.persistence.ManyToOne;
+
 import java.time.LocalDate;
 
 public class Episodio {
@@ -8,6 +10,8 @@ public class Episodio {
     private Integer numeroEpisodio;
     private Double evaluacion;
     private LocalDate fechadeLanzamiento;
+    @ManyToOne
+    private Serie serie;
 
     public Episodio(Integer numero, DatosEpisodio d) {
         this.temporada = numero;
@@ -20,6 +24,14 @@ public class Episodio {
     }
         this.evaluacion = Double.valueOf(d.evaluacion());
         this.fechadeLanzamiento = LocalDate.parse(d.fechaLanzamiento());
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
     }
 
     public Integer getTemporada() {
