@@ -9,6 +9,7 @@ import java.util.Optional;
 
 
 public interface SerieRepository extends JpaRepository<Serie,Long> {
+
         Optional<Serie> findByTituloContainingIgnoreCase(String nombreSerie);
         List<Serie> findTop5ByOrderByEvaluacionDesc();
         List<Serie> findByGenero(Categoria categoria);
@@ -16,4 +17,4 @@ public interface SerieRepository extends JpaRepository<Serie,Long> {
 
     }
 
-}
+
