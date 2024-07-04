@@ -1,9 +1,6 @@
 package com.aluracursos.screenmatch.principal;
 
-import com.aluracursos.screenmatch.entities.Categoria;
-import com.aluracursos.screenmatch.entities.DatosSerie;
-import com.aluracursos.screenmatch.entities.DatosTemporada;
-import com.aluracursos.screenmatch.entities.Serie;
+import com.aluracursos.screenmatch.entities.*;
 import com.aluracursos.screenmatch.repository.SerieRepository;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConvierteDatos;
@@ -19,6 +16,7 @@ public class Principal {
     private List<DatosSerie> datosSeries = new ArrayList<>();
     private List<Serie> series = new ArrayList<>();
     private SerieRepository repository;
+    private Optional<Serie> serieBuscada;
     public Principal(SerieRepository repository) {
         this.repository = repository;
     }
@@ -36,6 +34,7 @@ public class Principal {
               5 - Top 5 series
               6 - Buscar series por categoría
               7 - Filtrar series
+              8 - Buscar episodio por titulo
               0 - Salir
               """;
             System.out.println(menu);
@@ -64,6 +63,12 @@ public class Principal {
                     break;
                 case 7:
                     filtrarSeriesPorTemporadaYEvaluacion();
+                    break;
+                case 8:
+                    buscarEpisodiosPorTitulo();
+                    break;
+                case 9:
+                    buscarTop5Episodios();
                     break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
@@ -145,17 +150,37 @@ public class Principal {
         seriesPorCategoria.forEach(System.out::println);
     }
 
-    public void filtrarSeriesPorTemporadaYEvaluacion(){
+    public void filtrarSeriesPorTemporadaYEvaluacion() {
         System.out.println("¿Filtrar séries con cuántas temporadas? ");
         var totalTemporadas = teclado.nextInt();
         teclado.nextLine();
         System.out.println("¿Com evaluación apartir de cuál valor? ");
         var evaluacion = teclado.nextDouble();
         teclado.nextLine();
-        List<Serie> filtroSeries = repository.findByTotalTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(totalTemporadas, evaluacion);
+        List<Serie> filtroSeries = repository.seriesPorTemporadaYEvaluacion(totalTemporadas, evaluacion);
         System.out.println("*** Series filtradas ***");
         filtroSeries.forEach(s ->
                 System.out.println(s.getTitulo() + "  - evaluacion: " + s.getEvaluacion()));
+    }
+    private void  buscarEpisodiosPorTitulo(){
+        System.out.println("Escribe el nombre del episodio que deseas buscar");
+        var nombreEpisodio = teclado.nextLine();
+        List<Episodio> episodiosEncontrados = repository.episodiosPorNombre(nombreEpisodio);
+        episodiosEncontrados.forEach(e ->
+                System.out.printf("Serie: %s Temporada %s Episodio %s Evaluación %s\n",
+                        e.getSerie().getTitulo(), e.getTemporada(), e.getNumeroEpisodio(), e.getEvaluacion()));
+
+    }
+    private void buscarTop5Episodios(){
+        buscarSeriePorTitulo();
+        if(serieBuscada.isPresent()){
+            Serie serie = serieBuscada.get();
+            List<Episodio> topEpisodios = repository.top5Episodios(serie);
+            topEpisodios.forEach(e ->
+                    System.out.printf("Serie: %s - Temporada %s - Episodio %s - Evaluación %s\n",
+                            e.getSerie().getTitulo(), e.getTemporada(), e.getTitulo(), e.getEvaluacion()));
+
+        }
     }
 }
 
