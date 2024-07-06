@@ -35,6 +35,7 @@ public class Principal {
               6 - Buscar series por categoría
               7 - Filtrar series
               8 - Buscar episodio por titulo
+              9 - Buscar top 5 episodios 
               0 - Salir
               """;
             System.out.println(menu);
